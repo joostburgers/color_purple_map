@@ -1,0 +1,35 @@
+location,lat,long,location_type,purchaser,item_purchased,purchased_with,purchased_from,race,gender,class
+Celie Childhood home,33.02050024570996,-83.3850089234675,economic,Albert/Mr. ___,livestock,good,Alphonso,Black,Male,Lower
+Celie Childhood home,33.02050024570996,-83.3850089234675,economic,Albert/Mr. ___,livestock,good,Alphonso,Black,Male,Lower
+Celie Childhood home,33.02050024570996,-83.3850089234675,economic,Alphonso,good,money,NA,NA,NA,NA
+Celie Childhood home,33.02050024570996,-83.3850089234675,economic,Alphonso,good,money,NA,NA,NA,NA
+Unnamed store in town (fabric),33.00037436173625,-83.55293525513748,economic,Corrine,good,money,Unnamed store clerk fabric,White,Male,Lower
+Unnamed store in town (dress),33.00212893882091,-83.55048908066463,economic,Kate,good,money,Unnamed store clerk dress store,White,Male,Lower
+Celie and Albert House,32.99976696381827,-83.5599840688572,economic,Albert/Mr. ___,good,NA,NA,NA,NA,NA
+Harpo and Sofia's house,33.00023939282284,-83.55957640425451,economic,Harpo,good,NA,NA,NA,NA,NA
+Miss Milli's house,32.999402580951326,-83.557033670263,economic,The Mayor/Millie's Husband,good,money,Unknown,NA,NA,NA
+Olinka Village,6.251275915595865,-10.378889436404226,economic,Unknown,land,money,Unknown,NA,NA,NA
+Africa,5.369085,-9.236846,economic,Englishmen,service,money,Africans,Group,Group,Poor
+Unknown place where Shug buys her clothing,35.13713103323558,-90.05711609106096,economic,Shug Avery,good,money,Unknown,NA,NA,NA
+Unknown place where Shug buys her car,35.1423794559834,-90.05283734326031,economic,Shug Avery,good,money,Unknown,NA,NA,NA
+"Memphis, TN",35.15221330647191,-90.06958208625237,economic,Shug Avery,good,money,Unknown,NA,NA,NA
+Unknown place where Shug buys her clothing,35.13713103323558,-90.05711609106096,economic,Shug Avery,good,money,Unknown,NA,NA,NA
+Africa,5.369085,-9.236846,economic,Nettie,good,money,Unknown,NA,NA,NA
+Unknown town in Georgia,NA,NA,economic,Nettie,service,NA,Unknown,NA,NA,NA
+Africa,5.369085,-9.236846,economic,Nettie,good,money,Unknown,NA,NA,NA
+Unknown town in Georgia,NA,NA,economic,Corrine,good,money,Unknown,NA,NA,NA
+"Memphis, TN",35.15221330647191,-90.06958208625237,economic,Shug Avery,good,money,NA,NA,NA,NA
+"Memphis, TN",35.15221330647191,-90.06958208625237,economic,Celie,good,money,NA,NA,NA,NA
+West Coast Africa,16.186562850355916,-16.665029397655395,economic,The English Rubber Company,land,service,The Inhabintants of West Coast Africa,Black,Group,Middle
+Olinka Village,6.251275915595865,-10.378889436404226,economic,The English Rubber Company,land,service,The Olinkas,Black,Group,Lower
+Olinka Villiage,NA,NA,economic,The Olinkas,land,money,The English Rubber Company,White,Group,Upper
+Monrovia,6.310806,-10.810706,economic,Nettie,good,money,NA,NA,NA,NA
+Monrovia,6.310806,-10.810706,economic,Nettie,good,money,NA,NA,NA,NA
+London,51.505154784266445,-0.14148688031308002,economic,Nettie,service,money,NA,NA,NA,NA
+Olinka Village,6.251275915595865,-10.378889436404226,economic,Nettie,land,service,NA,NA,NA,NA
+Celie's house,33.0095,-83.56,economic,Celie,good,land,Alphonso,Black,Male,Lower
+Celie's house,33.0095,-83.56,economic,Alphonso,service,money,NA,NA,NA,NA
+Celie's house,33.0095,-83.56,economic,Alphonso,good,money,NA,NA,NA,NA
+Celie's house,33.0095,-83.56,economic,Alphonso,good,money,NA,NA,NA,NA
+"Memphis, TN",35.15221330647191,-90.06958208625237,economic,NA,good,money,NA,NA,NA,NA
+Celie's house,33.0095,-83.56,economic,NA,service,money,NA,NA,NA,NA

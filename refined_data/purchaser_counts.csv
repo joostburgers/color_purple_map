@@ -1,0 +1,35 @@
+location,location_type,purchaser,item_purchased,purchased_with,purchased_from,race,gender,class,class_variable,job
+Celie Childhood home,economic,Albert/Mr. ___,livestock,good,Alphonso,Black,Male,Lower,FALSE,Landowner ; Farmer
+Celie Childhood home,economic,Albert/Mr. ___,livestock,good,Alphonso,Black,Male,Lower,FALSE,Landowner ; Farmer
+Celie Childhood home,economic,Alphonso,good,money,NA,Black,Male,Lower,TRUE,Farmer
+Celie Childhood home,economic,Alphonso,good,money,NA,Black,Male,Lower,TRUE,Farmer
+Unnamed store in town (fabric),economic,Corrine,good,money,Unnamed store clerk fabric,Black,Female,Middle,TRUE,Missionary
+Unnamed store in town (dress),economic,Kate,good,money,Unnamed store clerk dress store,Black,Female,Lower,FALSE,Maid
+Celie and Albert House,economic,Albert/Mr. ___,good,NA,NA,Black,Male,Lower,FALSE,Landowner ; Farmer
+Harpo and Sofia's house,economic,Harpo,good,NA,NA,Black,Male,Lower,TRUE,Farmer ; Business Owner
+Miss Milli's house,economic,The Mayor/Millie's Husband,good,money,Unknown,White,Male,Middle,FALSE,The Mayor
+Olinka Village,economic,Unknown,land,money,Unknown,NA,NA,NA,NA,NA
+Africa,economic,Englishmen,service,money,Africans,White,Male,Middle,TRUE,Traders
+Unknown place where Shug buys her clothing,economic,Shug Avery,good,money,Unknown,Black,Female,Middle,TRUE,Singer
+Unknown place where Shug buys her car,economic,Shug Avery,good,money,Unknown,Black,Female,Middle,TRUE,Singer
+"Memphis, TN",economic,Shug Avery,good,money,Unknown,Black,Female,Middle,TRUE,Singer
+Unknown place where Shug buys her clothing,economic,Shug Avery,good,money,Unknown,Black,Female,Middle,TRUE,Singer
+Africa,economic,Nettie,good,money,Unknown,Black,Female,Lower,TRUE,Missionary
+Unknown town in Georgia,economic,Nettie,service,NA,Unknown,Black,Female,Lower,TRUE,Missionary
+Africa,economic,Nettie,good,money,Unknown,Black,Female,Lower,TRUE,Missionary
+Unknown town in Georgia,economic,Corrine,good,money,Unknown,Black,Female,Middle,TRUE,Missionary
+"Memphis, TN",economic,Shug Avery,good,money,NA,Black,Female,Middle,TRUE,Singer
+"Memphis, TN",economic,Celie,good,money,NA,Black,Female,Poor,TRUE,House Wife ; Farmer ; Seamstress
+West Coast Africa,economic,The English Rubber Company,land,service,The Inhabintants of West Coast Africa,White,Group,Upper,FALSE,Corporation
+Olinka Village,economic,The English Rubber Company,land,service,The Olinkas,White,Group,Upper,FALSE,Corporation
+Olinka Villiage,economic,The Olinkas,land,money,The English Rubber Company,Black,Group,Lower,FALSE,Farmer
+Monrovia,economic,Nettie,good,money,NA,Black,Female,Lower,TRUE,Missionary
+Monrovia,economic,Nettie,good,money,NA,Black,Female,Lower,TRUE,Missionary
+London,economic,Nettie,service,money,NA,Black,Female,Lower,TRUE,Missionary
+Olinka Village,economic,Nettie,land,service,NA,Black,Female,Lower,TRUE,Missionary
+Celie's house,economic,Celie,good,land,Alphonso,Black,Female,Poor,TRUE,House Wife ; Farmer ; Seamstress
+Celie's house,economic,Alphonso,service,money,NA,Black,Male,Lower,TRUE,Farmer
+Celie's house,economic,Alphonso,good,money,NA,Black,Male,Lower,TRUE,Farmer
+Celie's house,economic,Alphonso,good,money,NA,Black,Male,Lower,TRUE,Farmer
+"Memphis, TN",economic,NA,good,money,NA,NA,NA,NA,NA,NA
+Celie's house,economic,NA,service,money,NA,NA,NA,NA,NA,NA

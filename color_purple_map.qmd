@@ -1,0 +1,272 @@
+---
+title: "Color Purple Map"
+execute:
+  echo: false
+  warning: false
+format:
+  html:
+    embed-resources: true
+---
+
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+
+# Define the folder path
+folder_path <- "data"
+
+```
+
+```{r}
+csv_files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
+
+# Read and assign each CSV file to a dataframe using the name after the hyphen
+walk(csv_files, function(file_path) {
+  file_name <- basename(file_path)
+  df_name <- str_extract(file_name, "(?<= - ).*(?=\\.csv$)")
+  
+  if (!is.na(df_name)) {
+    assign(df_name, read_csv(file_path), envir = .GlobalEnv)
+  }
+})
+```
+
+```{r}
+
+all_data <- primary_sheet %>% 
+            drop_na(first_6_words) %>% 
+            left_join(characters, by = c("purchaser" = "name")) %>%
+            left_join(locations, by = c("location"="name")) %>% 
+  select(-c(16:21), -last_col()) %>% 
+            relocate(coordinates, .after= location) %>% 
+  separate(coordinates, into = c("lat", "long"), sep = ", ", convert = TRUE) 
+            
+
+
+
+```
+
+```{r}
+location_type_count <- all_data %>% 
+                       group_by(location,lat,long) %>% 
+                        count(location_type) %>% 
+                        drop_na(lat)
+                      
+```
+
+```{r}
+purchaser <- primary_sheet %>%  
+                  drop_na(first_6_words) %>% 
+                    filter(location_type=="economic") %>% 
+            left_join(characters, by = c("purchaser" = "name")) %>%
+            left_join(locations, by = c("location"="name"))  %>% 
+  select(-c(16:21), -last_col()) %>% 
+            relocate(coordinates, .after= location) %>% 
+  separate(coordinates, into = c("lat", "long"), sep = ", ", convert = TRUE) %>% 
+  select(-c(11:12)) 
+```
+
+```{r}
+purchaser_counts <- purchaser %>% 
+  mutate(row_id = row_number()) %>%                      # Add a unique row ID
+  separate_rows(job, sep = ";\\s*") %>%                  # Split multiple jobs into rows
+  mutate(value = 1) %>%                                  # Add a dummy value to spread
+   pivot_wider(
+    id_cols = row_id,                                    # Use unique row ID
+    names_from = job,                                    # Each unique job becomes a column
+    values_from = value,
+    values_fill = 0                                      # Fill NAs with 0
+  ) %>%
+  left_join(purchaser %>% mutate(row_id = row_number()), by = "row_id") %>%  # Rejoin original data
+  select(-row_id) %>%                                    # Remove helper ID
+  relocate(where(is.numeric), .after = job)  
+```
+
+```{r}
+summary_by_location <- purchaser_counts %>%
+  
+  # Step 1: Count jobs per location
+  group_by(location, lat, long) %>%
+  summarise(
+    total_characters = n(),  # total number of people at this location
+    across(where(is.numeric), sum, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  
+  # Step 2: Join with gender counts
+  left_join(
+    purchaser_counts %>%
+      group_by(location, lat, long, gender) %>%
+      summarise(count = n(), .groups = "drop") %>%
+      pivot_wider(names_from = gender, values_from = count, values_fill = 0),
+    by = c("location", "lat", "long")
+  ) %>%
+  
+  # Step 3: Join with race counts
+  left_join(
+    purchaser_counts %>%
+      group_by(location, lat, long, race) %>%
+      summarise(count = n(), .groups = "drop") %>%
+      pivot_wider(names_from = race, values_from = count, values_fill = 0),
+    by = c("location", "lat", "long")
+  ) %>%
+  
+  # Step 4: Join with class counts
+  left_join(
+    purchaser_counts %>%
+      group_by(location, lat, long, class) %>%
+      summarise(count = n(), .groups = "drop") %>%
+      pivot_wider(names_from = class, values_from = count, values_fill = 0),
+    by = c("location", "lat", "long")
+  )
+  
+  
+```
+
+```{r}
+purchaser_demographic <- summary_by_location %>% 
+                                drop_na(lat) %>% 
+     select(!matches("NA")) %>% 
+     select(!matches("page"))
+```
+
+
+```{r}
+purchased_from <- primary_sheet %>%  
+                  drop_na(first_6_words) %>% 
+                    filter(location_type=="economic") %>% 
+            left_join(characters, by = c("purchased_from" = "name")) %>%
+            left_join(locations, by = c("location"="name"))  %>% 
+  select(-c(16:21), -last_col()) %>% 
+            relocate(coordinates, .after= location) %>% 
+  separate(coordinates, into = c("lat", "long"), sep = ", ", convert = TRUE) %>% 
+  select(-c(11:12)) 
+
+```
+
+```{r}
+purchased_from_counts <- purchased_from %>% 
+  mutate(row_id = row_number()) %>%                      # Add a unique row ID
+  separate_rows(job, sep = ";\\s*") %>%                  # Split multiple jobs into rows
+  mutate(value = 1) %>%                                  # Add a dummy value to spread
+   pivot_wider(
+    id_cols = row_id,                                    # Use unique row ID
+    names_from = job,                                    # Each unique job becomes a column
+    values_from = value,
+    values_fill = 0                                      # Fill NAs with 0
+  ) %>%
+  left_join(purchaser %>% mutate(row_id = row_number()), by = "row_id") %>%  # Rejoin original data
+  select(-row_id) %>%                                    # Remove helper ID
+  relocate(where(is.numeric), .after = job)  
+```
+
+```{r}
+purchased_from_summary <- purchased_from_counts %>%
+  
+  # Step 1: Count jobs per location
+  group_by(location, lat, long) %>%
+  summarise(
+    total_characters = n(),  # total number of people at this location
+    across(where(is.numeric), sum, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  
+  # Step 2: Join with gender counts
+  left_join(
+    purchased_from_counts %>%
+      group_by(location, lat, long, gender) %>%
+      summarise(count = n(), .groups = "drop") %>%
+      pivot_wider(names_from = gender, values_from = count, values_fill = 0),
+    by = c("location", "lat", "long")
+  ) %>%
+  
+  # Step 3: Join with race counts
+  left_join(
+    purchased_from_counts %>%
+      group_by(location, lat, long, race) %>%
+      summarise(count = n(), .groups = "drop") %>%
+      pivot_wider(names_from = race, values_from = count, values_fill = 0),
+    by = c("location", "lat", "long")
+  ) %>%
+  
+  # Step 4: Join with class counts
+  left_join(
+    purchased_from_counts %>%
+      group_by(location, lat, long, class) %>%
+      summarise(count = n(), .groups = "drop") %>%
+      pivot_wider(names_from = class, values_from = count, values_fill = 0),
+    by = c("location", "lat", "long")
+  )
+```
+
+```{r}
+purchased_from_demography <- purchased_from_summary %>% 
+  drop_na(lat) %>% 
+    select(-c(13,17,21)) %>% 
+    rename(unknown = NA.x) %>% 
+     select(!matches("page"))
+```
+
+```{r}
+write_csv(purchaser_demographic, "refined_data/purchaser_demographics.csv")
+```
+
+```{r}
+write_csv(purchased_from_demography, "refined_data/purchased_from_demographics.csv")
+```
+
+```{r}
+write_csv(location_type_count, "refined_data/location_type_count.csv")
+```
+
+```{r}
+gender_cols <- c("Female", "Male", "Group")
+race_cols   <- c("Black", "White")
+class_cols  <- c("Lower", "Middle", "Poor", "Upper")
+
+# Pivot gender
+gender_long <- purchaser_demographic %>%
+  pivot_longer(cols = all_of(gender_cols), names_to = "gender", values_to = "value") %>%
+  filter(value > 0) %>%
+  select(location, lat, long, gender)
+
+# Pivot race
+race_long <- purchaser_demographic %>%
+  pivot_longer(cols = all_of(race_cols), names_to = "race", values_to = "value") %>%
+  filter(value > 0) %>%
+  select(location, lat, long, race)
+
+# Pivot class
+class_long <- purchaser_demographic %>%
+  pivot_longer(cols = all_of(class_cols), names_to = "class", values_to = "value") %>%
+  filter(value > 0) %>%
+  select(location, lat, long, class)
+
+# Join all three identity types by location
+identity_long <- gender_long %>%
+  full_join(race_long,  by = c("location", "lat", "long")) %>%
+  full_join(class_long, by = c("location", "lat", "long"))
+```
+
+```{r}
+purchaser_counts_export <- purchaser_counts %>% 
+    select(2:12)
+```
+
+```{r}
+write_csv(purchaser_counts_export,"refined_data/purchaser_counts.csv")
+```
+
+```{r}
+purchased_from_counts_export <- purchased_from %>% 
+  select(3:13)
+```
+
+```{r}
+write_csv(purchased_from_counts_export, "refined_data/purchased_from_counts.csv")
+```
+
